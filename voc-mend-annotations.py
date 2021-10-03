@@ -32,7 +32,7 @@ def show_mend():
 def write_annotation(annotation_file):
   mend_annotation(annotation_file).write(f'{output_dir}{annotation_file}')
 
-for i in tqdm(desc='mend_annotations', iterable=os.listdir()):
+for i in tqdm(desc='mend_annotations', unit='files', iterable=os.listdir()):
   if i.endswith('.xml'):
     write_annotation(i)
 
