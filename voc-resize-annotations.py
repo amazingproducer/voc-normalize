@@ -10,7 +10,13 @@ os.mkdir('./annotations-resized')
 
 def get_resize_factor(annotation_file):
   a_file = etree.parse(annotation_file)
-  return int(a_file.xpath('/annotation/size/width')[0].text)/300
+  width = int(a_file.xpath(f'/annotation/size/width')[0].text)
+  height = int(a_file.xpath(f'/annotation/size/height')[0].text)
+  if width > height:
+#    print(width/300)
+    return width/300
+#  print(height/300)
+  return height/300
   
 def show_resize(annotation_file):
   a_file = etree.parse(annotation_file)
@@ -33,5 +39,6 @@ def write_annotation(annotation_file):
 
 for i in os.listdir():
   if i.endswith('.xml'):
+#    show_resize(i)
     write_annotation(i)
 
