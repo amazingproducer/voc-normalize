@@ -1,6 +1,7 @@
 #!/bin/env python3
 from lxml import etree
 import os
+from tqdm import tqdm
 
 output_dir = './annotations-resized/'
 
@@ -37,8 +38,7 @@ def resize_annotation(annotation_file):
 def write_annotation(annotation_file):
   resize_annotation(annotation_file).write(f'{output_dir}{annotation_file}')
 
-for i in os.listdir():
+for i in tqdm(os.listdir()):
   if i.endswith('.xml'):
-#    show_resize(i)
     write_annotation(i)
 
