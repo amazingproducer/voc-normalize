@@ -1,6 +1,7 @@
 #!/bin/env python3
 from lxml import etree
 import os
+from tqdm import tqdm
 
 output_dir = './annotations-mended/'
 
@@ -31,7 +32,7 @@ def show_mend():
 def write_annotation(annotation_file):
   mend_annotation(annotation_file).write(f'{output_dir}{annotation_file}')
 
-for i in os.listdir():
+for i in tqdm(desc='mend_annotations', iterable=os.listdir()):
   if i.endswith('.xml'):
     write_annotation(i)
 

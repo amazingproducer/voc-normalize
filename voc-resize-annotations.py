@@ -38,7 +38,7 @@ def resize_annotation(annotation_file):
 def write_annotation(annotation_file):
   resize_annotation(annotation_file).write(f'{output_dir}{annotation_file}')
 
-for i in tqdm(os.listdir()):
+for i in tqdm(desc='resize_annotations', iterable=os.listdir()):
   if i.endswith('.xml'):
     write_annotation(i)
 

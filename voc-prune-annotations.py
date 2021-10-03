@@ -3,6 +3,7 @@
 
 from lxml import etree
 import os
+from tqdm import tqdm
 
 resize_tags = ["xmin","ymin","xmax","ymax"]
 
@@ -31,7 +32,7 @@ def get_bad_boxes(print=False):
   return bad_boxes
 
 def del_orphans():
-  for i in os.listdir():
+  for i in tqdm(desc='del_orphans', iterable=os.listdir()):
     if i.endswith('xml'):
       r = i.split('.')[0]
       if f'{r}.jpg' not in os.listdir('../JPEGImages'):
@@ -39,7 +40,7 @@ def del_orphans():
 
 def del_bad_boxes():
   bad_boxes = get_bad_boxes()
-  for i in os.listdir():
+  for i in tqdm(desc='bad_boxes', iterable=os.listdir()):
     if i in bad_boxes:
       print(i)
       os.remove(i)
